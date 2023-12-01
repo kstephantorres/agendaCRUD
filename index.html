@@ -109,7 +109,10 @@
                   type="text"
                   id="nombre"
                   class="form-control"
-                  placeholder="Ej: Juan perez"
+                  placeholder="Ej: Juan Pablo"
+                  minlength="4"
+                  maxlength="40"
+                  required
                 />
               </div>
               <div class="mb-3">
@@ -118,25 +121,33 @@
                   type="text"
                   id="apellido"
                   class="form-control"
-                  placeholder="Ej: Juan perez"
+                  placeholder="Ej: Perez"
+                  minlength="4"
+                  maxlength="40"
+                  required
                 />
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input
-                  type="text"
+                  type="email"
                   id="email"
                   class="form-control"
-                  placeholder="Ej: Juan perez"
+                  placeholder="Ej: juanpablo.perez@gmail.com"
+                  min="8"
+                  max="200"
+                  required
                 />
               </div>
               <div class="mb-3">
                 <label for="telefono" class="form-label">Telefono</label>
                 <input
-                  type="text"
+                  type="tel"
                   id="telefono"
                   class="form-control"
-                  placeholder="Ej: Juan perez"
+                  placeholder="Ej: 3815569789"
+                  pattern="[0-9]{10}"
+                  required
                 />
               </div>
               <button class="btn btn-primary" type="submit">Agregar</button>
