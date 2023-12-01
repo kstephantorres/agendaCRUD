@@ -4,7 +4,7 @@ export default class Contacto {
     #apellido; 
     #email; 
     #telefono; 
-    constructor(id , nombre, apellido, email, telefono) { 
+    constructor({id , nombre, apellido, email, telefono}) { 
         this.#id = id; 
         this.#nombre = nombre; 
         this.#apellido = apellido; 
@@ -37,4 +37,14 @@ export default class Contacto {
     set telefono(nuevoTelefono) { 
         this.#telefono = nuevoTelefono; 
     } 
+    //para poder usar stringify ya que no puede acceder directamente a las propiedades privadas de nuestra clase
+    toJSON(){
+        return {
+            id: this.id,
+            nombre: this.nombre,
+            apellido: this.apellido,
+            email: this.email,
+            telefono: this.telefono
+        }
+    }
 }
