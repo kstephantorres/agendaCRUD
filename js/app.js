@@ -3,17 +3,24 @@ import Contacto from "./classContacto.js";
 // const contactoNuevo = new Contacto(1,'nombre','apellido','mail',12345678)
 
 //variables globales
-const agenda= []
+
+
+// localStorage.getItem('agendaKey')  => lo trae en formato JSON
+const agenda= JSON.parse(localStorage.getItem('agendaKey')) || []
+
 
 const formNuevoContacto = document.querySelector('form')
 
 
 // funciones
 
-const guardarLocalStorage = ()=>{
+const guardarLocalStorage =()=>{
     // 'agendaKey' es el nombre que va a tener nuesto objeto JSON en el local storage     
     localStorage.setItem('agendaKey', JSON.stringify(agenda))
     
+}
+const limpiarFormulario =()=>{
+    formNuevoContacto.reset()
 }
 
 
@@ -36,5 +43,6 @@ formNuevoContacto.addEventListener('submit',(event)=>{
     agenda.push(contactoNuevo)
     
     guardarLocalStorage()
+    limpiarFormulario()
 
 })
