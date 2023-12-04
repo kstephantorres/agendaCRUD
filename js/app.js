@@ -39,12 +39,20 @@ const crearFila=(contacto, fila)=>{
             <td>
             <a class="btn btn-primary" href="./pages/detalleContacto.html">Ver mas</a>
             <button class="btn btn-warning">Editar</button>
-            <button class="btn btn-danger">Borrar</button>
+            <button class="btn btn-danger" onclick="borrarContacto('${contacto.id}')">Borrar</button>
             </td>
         </tr>
     `
 }
 
+window.borrarContacto=(idContacto)=>{  
+    const posicionContato =agenda.findIndex((contacto)=>{contacto.id === idContacto})
+    agenda.splice(posicionContato,1)
+    guardarLocalStorage()
+    
+    console.log("🚀 ~ file: app.js:50 ~ borrarContacto ~ 'hola':", 'hola')
+
+}
 //L O G I C A 
 cargaInicial()
 
