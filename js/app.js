@@ -40,14 +40,14 @@ const crearFila=(contacto, fila)=>{
             <td>${contacto.telefono}</td>
             <td>
             <button class="btn btn-primary" onclick="detalleContacto('${contacto.id}')">Ver mas</button>
-            <button class="btn btn-warning">Editar</button>
+            <button class="btn btn-warning" onclick="editarContacto('${contacto.id}')">Editar</button>
             <button class="btn btn-danger" onclick="borrarContacto('${contacto.id}')">Borrar</button>
             </td>
         </tr>
     `
 }
 
-window..Contacto=(idContacto)=>{  
+window.borrarContacto=(idContacto)=>{  
     // Animacion para confirmar o aprobar la elimiacion de un contacto
     
     Swal.fire({
@@ -77,8 +77,15 @@ window..Contacto=(idContacto)=>{
 }
 
 const borrarFila=(posicionContato)=>{
-    // const tablaContacto = document.getElementById('tablaContacto')
     tablaContacto.removeChild(tablaContacto.children[posicionContato])
+    actualizarNumero(posicionContato)
+}
+
+const actualizarNumero=(posicionContato)=>{
+    const cantidad = tablaContacto.children.length
+    for(let i = posicionContato; i < cantidad;i++){
+        tablaContacto.children[i].children[0].innerText = i+1
+    }
 }
 
 window.detalleContacto=(idContacto)=>{
