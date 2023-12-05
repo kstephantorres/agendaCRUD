@@ -3,14 +3,14 @@ import { validarCantidadCaracteres } from "./validaciones.js";
 
 // const contactoNuevo = new Contacto(1,'nombre','apellido','mail',12345678)
 
-//V A R I A B L E S   G L O B A L E S 
+/////////////////////////////////////////// V A R I A B L E S   G L O B A L E S 
 
 // localStorage.getItem('agendaKey')  => lo trae en formato JSON
 const agenda= JSON.parse(localStorage.getItem('agendaKey')) || []
 const formNuevoContacto = document.querySelector('form')
 const tablaContacto = document.getElementById('tablaContacto')
 
-// F U N C I O N E S 
+///////////////////////////////////////////  F U N C I O N E S 
 
 const guardarLocalStorage =()=>{
     // 'agendaKey' es el nombre que va a tener nuesto objeto JSON en el local storage     
@@ -89,11 +89,16 @@ const actualizarNumero=(posicionContato)=>{
 }
 
 window.detalleContacto=(idContacto)=>{
-    
-    console.log("🚀 ~ file: app.js:89 ~ window.location:", window.location)
-    window.location.href = window.location.origin+'/pages/detalleContacto.html'
+    const url = window.location
+    //Luego del signo de pregunta (?) en el url son parametros
+    url.href = `${url.origin}/pages/detalleContacto.html?id=${idContacto}`
 }
-//L O G I C A 
+
+window.editarContacto=(idContacto)=>{
+
+}
+
+///////////////////////////////////////////  L O G I C A 
 cargaInicial()
 
 formNuevoContacto.addEventListener('submit',(event)=>{
@@ -103,20 +108,20 @@ formNuevoContacto.addEventListener('submit',(event)=>{
     if(validarCantidadCaracteres(inputs[0].value, 4, 40)
        && validarCantidadCaracteres(inputs[1].value,4,40) 
     ){
-
+        const contactoNuevo = new Contacto({
+            id:crypto.randomUUID(),
+            nombre: inputs[0].value,
+            apellido: inputs[1].value,
+            email: inputs[2].value,
+            telefono: Number(inputs[3].value)})
+        
+        agenda.push(contactoNuevo)
+        
+        guardarLocalStorage()
+        limpiarFormulario()
+        crearFila(contactoNuevo,agenda.length)
+    }else{
+        alert('Error al momento de ingresar datos')
     }
    
-
-    const contactoNuevo = new Contacto({
-        id:crypto.randomUUID(),
-        nombre: inputs[0].value,
-        apellido: inputs[1].value,
-        email: inputs[2].value,
-        telefono: Number(inputs[3].value)})
-    
-    agenda.push(contactoNuevo)
-    
-    guardarLocalStorage()
-    limpiarFormulario()
-    crearFila(contactoNuevo,agenda.length)
 })
