@@ -1,5 +1,5 @@
 import Contacto from "./classContacto.js";
-import { validarCantidadCaracteres } from "./validaciones.js";
+import { validarCantidadCaracteres, validarEmail } from "./validaciones.js";
 
 // const contactoNuevo = new Contacto(1,'nombre','apellido','mail',12345678)
 
@@ -95,7 +95,8 @@ window.detalleContacto=(idContacto)=>{
 }
 
 window.editarContacto=(idContacto)=>{
-
+    const url = window.location
+    url.href = `${url.origin}/pages/modificarContacto.html?id=${idContacto}`
 }
 
 ///////////////////////////////////////////  L O G I C A 
@@ -106,7 +107,8 @@ formNuevoContacto.addEventListener('submit',(event)=>{
     
     const inputs = document.querySelectorAll('input')
     if(validarCantidadCaracteres(inputs[0].value, 4, 40)
-       && validarCantidadCaracteres(inputs[1].value,4,40) 
+        && validarCantidadCaracteres(inputs[1].value,4,40)
+        && validarEmail(inputs[2].value)
     ){
         const contactoNuevo = new Contacto({
             id:crypto.randomUUID(),
